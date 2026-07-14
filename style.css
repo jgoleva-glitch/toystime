@@ -69,6 +69,13 @@ img { max-width: 100%; display: block; }
   letter-spacing: 0.01em;
 }
 
+.brand-logo {
+  display: block;
+  margin: clamp(16px, 2.5vw, 28px) auto 0;
+  height: clamp(32px, 5vw, 56px);
+  width: auto;
+}
+
 /* ---- Товар: название + ролик ---- */
 .product {
   padding: 40px 0;
@@ -78,7 +85,9 @@ img { max-width: 100%; display: block; }
 /* Панель с названием и описанием поверх фото (как на слайдах, без буллетов и слоганов) */
 .poster-info {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
   width: 52%;
   padding: clamp(20px, 3.2vw, 46px);
   display: flex;
@@ -210,8 +219,11 @@ img { max-width: 100%; display: block; }
   }
   .toy-desc {
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+  /* на узких экранах кнопку опускаем вниз, чтобы не перекрывала текст */
+  .play-btn { top: auto; bottom: 14px; transform: translateX(-50%); }
+  .media.clickable:hover .play-btn { transform: translateX(-50%) scale(1.06); }
 }
