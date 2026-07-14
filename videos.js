@@ -15,14 +15,14 @@
 // Про Яндекс.Диск: файл должен быть открыт по ссылке («Поделиться» → «Скопировать ссылку»).
 
 const VIDEOS = {
-  'magic-mouse': 'video/magic-mouse.webm',
-  'magic-tail': 'video/magic-tail.webm',
-  'magic-twins': 'video/magic-twins.webm',
-  'magic-snail': 'video/magic-snail.webm',
-  'magic-spin': 'video/magic-spin.webm',
-  'magic-box': 'video/magic-box.webm',
-  'magic-ring': 'video/magic-ring.webm',
-  'magic-bounce': 'video/magic-bounce.webm',
-  'magic-bounce-pro': 'video/magic-bounce-pro.webm',
-  'doggy-pull': 'video/doggy-pull.webm',
+  'magic-mouse': 'https://disk.yandex.ru/i/yszB2ah_S7AJzg',
+  'magic-tail': 'https://disk.yandex.ru/i/LwD-r5lT_iOuiQ',
+  'magic-twins': 'https://disk.yandex.ru/i/He_9Z_MMSf0k4Q',
+  'magic-snail': 'https://disk.yandex.ru/i/bVp917QRIWkz0w',
+  'magic-spin': 'https://disk.yandex.ru/i/rZdc0eH9aPToXg',
+  'magic-box': 'https://disk.yandex.ru/i/NRKNj3PdyGLIxA',
+  'magic-ring': 'https://disk.yandex.ru/i/8EG4tnJHlnRFbA',
+  'magic-bounce': 'https://disk.yandex.ru/i/ho_JLF3ghmjvrA',
+  'magic-bounce-pro': 'https://disk.yandex.ru/i/QGzTb-AlFSYy2g',
+  'doggy-pull': 'https://disk.yandex.ru/i/HyLN1-fL7UzyeQ',
 };
