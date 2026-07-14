@@ -32,24 +32,32 @@ async function yandexDirectUrl(share) {
   return data.href;
 }
 
-function mountIframe(slot, src) {
+function mountIframe(slot, src, muted) {
   const sep = src.includes('?') ? '&' : '?';
-  slot.innerHTML = `<iframe src="${src}${sep}autoplay=1" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+  slot.innerHTML = `<iframe src="${src}${sep}autoplay=1${muted ? '&mute=1' : ''}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
   slot.classList.add('has-video');
 }
 
-function mountVideo(slot, src, poster) {
-  slot.innerHTML = `<video src="${src}"${poster ? ` poster="${poster}"` : ''} controls autoplay playsinline></video>`;
+function mountVideo(slot, src, poster, muted) {
+  slot.innerHTML = `<video src="${src}"${poster ? ` poster="${poster}"` : ''} controls autoplay playsinline${muted ? ' muted' : ''}></video>`;
   slot.classList.add('has-video');
+  if (muted) {
+    const v = slot.querySelector('video');
+    if (v) {
+      v.muted = true;
+      const p = v.play();
+      if (p && p.catch) p.catch(() => {});
+    }
+  }
 }
 
-function loadAndPlay(slot, info, poster) {
+function loadAndPlay(slot, info, poster, muted) {
   if (info.type === 'iframe') {
-    mountIframe(slot, info.src);
+    mountIframe(slot, info.src, muted);
     return;
   }
   if (info.type === 'video') {
-    mountVideo(slot, info.src, poster);
+    mountVideo(slot, info.src, poster, muted);
     return;
   }
   // yandex — сначала получаем прямую ссылку
@@ -57,7 +65,7 @@ function loadAndPlay(slot, info, poster) {
   yandexDirectUrl(info.share)
     .then((href) => {
       slot.classList.remove('loading');
-      mountVideo(slot, href, poster);
+      mountVideo(slot, href, poster, muted);
     })
     .catch(() => {
       slot.classList.remove('loading');
@@ -90,4 +98,40 @@ function renderVideos() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', renderVideos);
+// Переход по ссылке из презентации (…/#magic-mouse): прокручиваем к товару
+// и сразу открываем его ролик. Стартуем без звука — так браузер разрешает
+// автозапуск; звук включается кнопкой в плеере.
+function openFromHash() {
+  const slug = decodeURIComponent((location.hash || '').replace('#', ''));
+  if (!slug) return;
+  const section = document.getElementById(slug);
+  const slot = document.querySelector('[data-slug="' + slug + '"]');
+  if (!section) return;
+
+  // открываем ролик (без звука — чтобы автозапуск был разрешён)
+  if (
+    slot &&
+    !slot.classList.contains('no-video') &&
+    !slot.classList.contains('has-video') &&
+    !slot.classList.contains('loading')
+  ) {
+    const info = classify((typeof VIDEOS !== 'undefined' ? VIDEOS : {})[slug]);
+    if (info) {
+      const img = slot.querySelector('img');
+      loadAndPlay(slot, info, img ? img.getAttribute('src') : '', true);
+    }
+  }
+
+  // «доводящий» скролл: сразу, после подгрузки макета и после полной загрузки
+  const snap = () => section.scrollIntoView({ block: 'center' });
+  snap();
+  setTimeout(snap, 250);
+  setTimeout(snap, 800);
+  window.addEventListener('load', snap, { once: true });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderVideos();
+  openFromHash();
+});
+window.addEventListener('hashchange', openFromHash);
