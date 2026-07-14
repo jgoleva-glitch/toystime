@@ -1,0 +1,39 @@
+КАК ПОДКЛЮЧИТЬ СЖАТЫЕ ВИДЕО (webm или mp4)
+==========================================
+
+1) Сожмите ролик и положите файл В ЭТУ ПАПКУ (video/).
+   Назовите файл по товару — используйте ИМЕННО эти имена (важно для порядка):
+
+     video/magic-mouse.webm
+     video/magic-tail.webm
+     video/magic-twins.webm
+     video/magic-snail.webm
+     video/magic-spin.webm
+     video/magic-box.webm
+     video/magic-ring.webm
+     video/magic-bounce.webm
+     video/magic-bounce-pro.webm
+     video/magic-bob.webm
+     video/doggy-pull.webm
+     video/doggy-boost.webm
+
+   (Можно .mp4 вместо .webm — тогда и в ссылке пишите .mp4)
+
+2) Откройте файл videos.js (лежит рядом с index.html) и укажите путь к файлу.
+   Например, для мышки строку:
+
+     'magic-mouse': 'https://disk.yandex.ru/i/...',
+
+   замените на:
+
+     'magic-mouse': 'video/magic-mouse.webm',
+
+3) Сохраните и заново загрузите папку сайта на хостинг.
+
+ВАЖНО про размер файла:
+- Cloudflare Pages не принимает файлы больше 25 МБ. Держите каждый ролик до ~24 МБ.
+- Netlify лимит больше, но webm под 25 МБ — безопасно везде.
+
+Рекомендуемое сжатие (если сжимаете через ffmpeg):
+  ffmpeg -i исходник.mp4 -c:v libvpx-vp9 -crf 34 -b:v 0 -vf "scale=-2:1080" -an выход.webm
+  (-an убирает звук; уберите его, если звук нужен, и добавьте: -c:a libopus -b:a 96k)
