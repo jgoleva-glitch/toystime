@@ -15,7 +15,7 @@
 // Про Яндекс.Диск: файл должен быть открыт по ссылке («Поделиться» → «Скопировать ссылку»).
 
 const VIDEOS = {
-  'magic-mouse': 'https://disk.yandex.ru/i/yszB2ah_S7AJzg', // webm ещё нет — играет с Яндекс.Диска
+  'magic-mouse': 'video/magic-mouse.webm',
   'magic-tail': 'video/magic-tail.webm',
   'magic-twins': 'video/magic-twins.webm',
   'magic-snail': 'video/magic-snail.webm',
@@ -24,7 +24,5 @@ const VIDEOS = {
   'magic-ring': 'video/magic-ring.webm',
   'magic-bounce': 'video/magic-bounce.webm',
   'magic-bounce-pro': 'video/magic-bounce-pro.webm',
-  'magic-bob': '',
   'doggy-pull': 'video/doggy-pull.webm',
-  'doggy-boost': '',
 };

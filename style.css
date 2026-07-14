@@ -76,46 +76,10 @@ img { max-width: 100%; display: block; }
   width: auto;
 }
 
-/* ---- Товар: название + ролик ---- */
+/* ---- Товар: слайд-картинка + ролик ---- */
 .product {
   padding: 40px 0;
   scroll-margin-top: 24px;
-}
-
-/* Панель с названием и описанием поверх фото (как на слайдах, без буллетов и слоганов) */
-.poster-info {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 52%;
-  padding: clamp(20px, 3.2vw, 46px);
-  display: flex;
-  flex-direction: column;
-  gap: clamp(8px, 1vw, 14px);
-  align-items: flex-start;
-  justify-content: flex-start;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.94) 0%, rgba(255, 255, 255, 0.86) 55%, rgba(255, 255, 255, 0) 100%);
-  pointer-events: none;
-}
-
-.toy-name {
-  font-family: var(--font);
-  font-weight: 500;
-  color: var(--ink);
-  font-size: clamp(22px, 2.9vw, 38px);
-  margin: 0;
-  letter-spacing: 0.01em;
-  line-height: 1.05;
-}
-
-.toy-desc {
-  font-family: var(--font);
-  font-weight: 500;
-  color: var(--ink);
-  font-size: clamp(12px, 1.15vw, 16px);
-  line-height: 1.4;
-  margin: 0;
 }
 
 .media {
@@ -212,18 +176,4 @@ img { max-width: 100%; display: block; }
   .product { padding: 28px 0; }
   .play-btn { font-size: 18px; padding: 12px 24px 12px 20px; gap: 10px; }
   .play-btn::before { border-width: 8px 0 8px 14px; }
-  .poster-info {
-    width: 100%;
-    padding: 16px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.93) 0%, rgba(255, 255, 255, 0.78) 46%, rgba(255, 255, 255, 0.04) 100%);
-  }
-  .toy-desc {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  /* на узких экранах кнопку опускаем вниз, чтобы не перекрывала текст */
-  .play-btn { top: auto; bottom: 14px; transform: translateX(-50%); }
-  .media.clickable:hover .play-btn { transform: translateX(-50%) scale(1.06); }
 }

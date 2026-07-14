@@ -1,0 +1,7 @@
+name = "toystime"
+compatibility_date = "2024-11-01"
+
+# Статический сайт (только файлы, без серверного кода).
+# Cloudflare раздаёт содержимое папки как есть.
+[assets]
+directory = "."
